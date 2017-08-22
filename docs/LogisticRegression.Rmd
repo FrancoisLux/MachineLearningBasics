@@ -45,7 +45,8 @@ First case: y = 1: $L(\hat{y},y)=-\;log\hat{y}$ wants a large $\hat{y}$ in order
 Second case: y = 0: $L(\hat{y},y)=-log(1-\hat{y}))$ wants a small $\hat{y}$ in order to minimize loss-function.  
 
 ### Cost-function(for all test-data):  
-$$J(w,b) = \frac1m\sum\limits_{i=1}^mL(\hat{y}^i,y^i)$$
+$$J(w,b) = \frac1m\sum\limits_{i=1}^mL(\hat{y}^i,y^i)$$   
+
 ### Gradient Descent:
 
 Initialize w and b, most often with 0 or random (does not matter too much because Loss-function is convex).
