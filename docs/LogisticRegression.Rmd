@@ -3,12 +3,12 @@ title: "Machine Learning - Notes"
 author: "François Lux"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 2
   html_document:
     keep_md: yes
     theme: cerulean
-    toc: yes
-    toc_depth: 2
-  pdf_document:
     toc: yes
     toc_depth: 2
 ---
@@ -51,14 +51,14 @@ $$J(w,b) = \frac1m\sum\limits_{i=1}^mL(\hat{y}^i,y^i)$$
 
 Initialize w and b, most often with 0 or random (does not matter too much because Loss-function is convex).
 
-Repeat {
-  $w = w -\alpha \frac{dJ(w, b)}{dw}$
-  $b = b -\alpha \frac{dJ(w, b)}{db}$
-}
+Repeat {    
+  $w = w -\alpha \frac{dJ(w, b)}{dw}$    
+  $b = b -\alpha \frac{dJ(w, b)}{db}$    
+}    
 
 If gradient is negative then update is positive, if gradient is positive the update is negative. Alpha is the learning rate. 
 
-Backpropagation: Using the chainrule to calculate the derivative of the input-parameters with respect to the fina output (J or L)
+Backpropagation: Using the chainrule to calculate the derivative of the input-parameters with respect to the final output (J or L).
 
  
 
