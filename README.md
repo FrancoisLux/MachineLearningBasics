@@ -1,5 +1,3 @@
 # MachineLearningBasics
 
-Notes and Code made during the Coursera-MOOC    
- 
-"Neural Networks and Deep Learning"
+Notes and Code made during the Coursera-MOOC - "Neural Networks and Deep Learning"
