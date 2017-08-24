@@ -4,6 +4,7 @@ import time
 a = np.random.rand(1000000)
 b = np.random.rand(1000000)
 
+c = 0
 tic = time.time()
 for i in range(1000000):
     c += a[i]*b[i]
