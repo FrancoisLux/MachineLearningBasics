@@ -11,6 +11,9 @@ output:
     theme: cerulean
     toc: yes
     toc_depth: 2
+  word_document:
+    toc: yes
+    toc_depth: '2'
 ---
 ***
 <div style="text-align: center;" markdown="1">
@@ -18,6 +21,15 @@ output:
 </div>
 
 <br><br>
+
+# Notation - Vectorized Expressions:
+
+$n_x$: number of features   
+$m$: number of datasamples   
+$X = (n_x, m)$-Matrix, containing the data-samples, one sample each column      
+$w^T = (1, n_x)$-Vector, containing the weights for each feature  
+b = bias-scalar, extended to a vector (broadcasting)   
+$\hat{y} = a$: calculated probability of classification y = 1   
 
 ## 1) Logistic Regression - Classification
 
@@ -40,9 +52,9 @@ But optimization problem becomes non-convex (many local optima). So this causes 
 Instead we use:  
 
 $$L(\hat{y},y)=-(y\;log\hat{y} + (1 - y)\;log(1-\hat{y}))$$
-First case: y = 1: $L(\hat{y},y)=-\;log\hat{y}$ wants a large $\hat{y}$ in order to minimize loss-function.  
+First case: y = 1:   $L(\hat{y},y)=-\;log\hat{y}$;  wants a large $\hat{y}$ in order to minimize loss-function.  
 
-Second case: y = 0: $L(\hat{y},y)=-log(1-\hat{y}))$ wants a small $\hat{y}$ in order to minimize loss-function.  
+Second case: y = 0:   $L(\hat{y},y)=-log(1-\hat{y}))$;   wants a small $\hat{y}$ in order to minimize loss-function.  
 
 ### Cost-function(for all test-data):  
 $$J(w,b) = \frac1m\sum\limits_{i=1}^mL(\hat{y}^i,y^i)$$   
@@ -58,8 +70,33 @@ Repeat {
 
 If gradient is negative then update is positive, if gradient is positive the update is negative. Alpha is the learning rate. 
 
-Backpropagation: Using the chainrule to calculate the derivative of the input-parameters with respect to the final output (J or L).
+Backpropagation: Using the chainrule to calculate the partial derivative of the  final output (J or L) with respect to the input variables.
 
  
+### Vectorization
+
+(for loops) are around 300 times slower than vectorized calculations because these can be calculated in parallel using SIMD(See test-script vectorization.py).
+
+$Z = [z_1, z_2, ..., z_m] = w^TX + b = np.dot(w.T, X) + b$   
+$A = [a_1, a_2, ..., a_m] = [\sigma(z_1), \sigma(z_2), ...] = \sigma(Z)$   
+
+
+We need to calculate the derivative of the loss-function L with respect to the weights and the bias in order to update them.   
+
+This is done using the chainrule, so we first calculate $$\frac{dL(a,y)}{da} = -\frac{y}{a} + \frac{1-y}{1-a}$$ and then we calculate $$\frac{da(z)}{dz} = a(1-a)$$
+From there follows that $$\frac{dL}{dz} = \frac{dL(a,y)}{da} \cdot \frac{da(z)}{dz} = a - y$$
+The last step then is $$\frac{dL}{dw_1} = x_1 \cdot dz$$ 
+$$ \frac{dL}{dw_2} = x_2 \cdot dz$$
+$$\frac{dL}{db} = dz$$
+
+Vectorized: $$dZ = A - Y$$,    
+$$db = \frac{1}{m}np.sum(dZ)$$    
+$$dw = \frac{1}{m}X dz^T$$ 
+
+
+
+
+
+
 
 
