@@ -1,2 +1,3 @@
-docs/LogisticRegression.md
-docs/LogisticRegression.html
+docs/LogisticRegression.*
+.DS_Store
+.ipynb_checkpoints/*
